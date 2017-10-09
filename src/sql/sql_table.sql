@@ -2,7 +2,8 @@
 SQLyog v10.2 
 MySQL - 5.1.72-community : Database - mybatis
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -17,7 +18,7 @@ MySQL - 5.1.72-community : Database - mybatis
 CREATE TABLE `items` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL COMMENT '商品名称',
-  `price` float(10,1) NOT NULL COMMENT '商品定价',
+  `price` DECIMAL(10,1) NOT NULL COMMENT '商品定价',
   `detail` text COMMENT '商品描述',
   `pic` varchar(64) DEFAULT NULL COMMENT '商品图片',
   `createtime` datetime NOT NULL COMMENT '生产日期',
@@ -34,8 +35,8 @@ CREATE TABLE `orderdetail` (
   PRIMARY KEY (`id`),
   KEY `FK_orderdetail_1` (`orders_id`),
   KEY `FK_orderdetail_2` (`items_id`),
-  CONSTRAINT `FK_orderdetail_1` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_orderdetail_2` FOREIGN KEY (`items_id`) REFERENCES `items` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_orderdetail_orders` FOREIGN KEY (`orders_id`) REFERENCES `orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_orderdetail_items` FOREIGN KEY (`items_id`) REFERENCES `items` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `orders` */
